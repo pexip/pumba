@@ -503,7 +503,7 @@ func (client dockerClient) tcCommands(ctx context.Context, c *Container, argsLis
 	if tcimage == "" {
 		for _, args := range argsList {
 			if err := client.execOnContainer(ctx, c, "tc", args, true); err != nil {
-				return errors.Wrapf(err, "error running tc command on container: %v", strings.Join(args, ""))
+				return errors.Wrapf(err, "error running tc command on container: %v", strings.Join(args, " "))
 			}
 		}
 		return nil
@@ -595,7 +595,7 @@ func (client dockerClient) tcContainerCommands(ctx context.Context, target *Cont
 
 	for _, args := range argsList {
 		if err = client.tcExecCommand(ctx, createResponse.ID, args); err != nil {
-			return errors.Wrapf(err, "error running tc command on container: %v", strings.Join(args, ""))
+			return errors.Wrapf(err, "error running tc command on container: %v", strings.Join(args, " "))
 		}
 	}
 
